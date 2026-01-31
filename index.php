@@ -43,23 +43,13 @@
     </div>
 
     <div class="card p-3 shadow-sm">
-        <div class="table-responsive">
-            <table class="table table-bordered table-striped" id="attendanceTable">
-                <thead class="table-dark">
-                    <tr>
-                        <th>#</th>
-                        <th>Time In</th>
-                        <th>Time Out</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Rows will be inserted here using JS or backend -->
-                </tbody>
-            </table>
+        <div class="table-responsive" id="attndnc_logs_card">
+           
         </div>
     </div>
 </div>
 
 </body>
+
+<script script="employee-attendance-module/view/index-component.js?t=<?php echo time(); ?>"></script>
 </html>
