@@ -51,5 +51,5 @@
 
 </body>
 
-<script script="employee-attendance-module/view/index-component.js?t=<?php echo time(); ?>"></script>
+<script type="module" src="view/index-script.js?t=<?php echo time(); ?>"></script>
 </html>

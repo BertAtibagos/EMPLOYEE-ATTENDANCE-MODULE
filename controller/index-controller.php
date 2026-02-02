@@ -1,5 +1,5 @@
 <?php
-require("../config/conn-config.php");
+require('../config/conn-config.php');
 
 $type = $_POST['type'];
 
@@ -19,7 +19,7 @@ if($type == "FETCH_ATTENDANCE_LOGS"){
                 DATE(log_hist.SchlClsLogHis_DATETIME),
                 log_hist.SchlUserRF_ID";
 
-    $stmt = $dbPortal->prepare($qry);
+    $stmt = $dbConn->prepare($qry);
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $result = $stmt->get_result();
