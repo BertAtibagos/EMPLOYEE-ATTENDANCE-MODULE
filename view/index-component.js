@@ -26,7 +26,7 @@ function groupByDate(logs) {
 }
 
 
-async function tableComponent(){
+export async function tableComponent(){
     
     let loading = true;
     let res = [];
@@ -36,7 +36,7 @@ async function tableComponent(){
     }
 
     try{
-        const req = await fetch(`employee-attendance-module/controller/index-controller.php`,{
+        const req = await fetch(`controller/index-controller.php`,{
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: new URLSearchParams({
@@ -68,7 +68,7 @@ async function tableComponent(){
                     <tbody>
                         ${logs.map((data, index) => (
                             `<tr>
-                                <td>${index + 1}</td>
+                                <td>${data.id}</td>
                                 <td>${data.first_login}</td>
                                 <td>${data.last_login}</td>
                             </tr>`
@@ -79,5 +79,3 @@ async function tableComponent(){
         )).join('')
     );
 }
-
-attendance.innerHTML = await tableComponent();
