@@ -1,7 +1,7 @@
 export async function subjectFilterComponent(){
 
     try{
-        const req = await fetch(`controller/index-controller.php`,{
+        const req = await fetch(`controller/server.php`,{
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: new URLSearchParams({
