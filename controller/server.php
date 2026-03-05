@@ -5,7 +5,16 @@ $type = $_POST['type'];
 
 if($type == "FETCH_ATTENDANCE_LOGS"){
 
-    $id = 64004;
+    // $USERID = $_SESSION['STUDENT']['ID'];
+    $USERID = 64004;
+
+     $subjId = $_POST['subjectId'];
+     $filter = "";
+     $value = "";
+
+    if ($subjId !== null && $subjId !== "") {
+        $filter= "";
+    }
     
     $qry = "SELECT
                 `SchlClsLogHis_ID` AS id,
@@ -15,12 +24,13 @@ if($type == "FETCH_ATTENDANCE_LOGS"){
                 MAX(log_hist.SchlClsLogHis_DATETIME) AS last_login
             FROM schoolclassloghistory AS log_hist
             WHERE `SchlEnrollAssColl_ID` = ?
+            $filter
             GROUP BY
                 DATE(log_hist.SchlClsLogHis_DATETIME),
                 log_hist.SchlUserRF_ID";
 
     $stmt = $dbConn->prepare($qry);
-    $stmt->bind_param("i", $id);
+    $stmt->bind_param("i", $USERID);
     $stmt->execute();
     $result = $stmt->get_result();
     $fetch = $result->fetch_all(MYSQLI_ASSOC);
@@ -36,7 +46,7 @@ if ($type === 'GET_SUBJECT_LIST') {
     // $YRID   = $_SESSION['STUDENT']['YRID'];
     // $PRDID  = $_SESSION['STUDENT']['PRDID'];
 
-    $USERID = 957;
+    $USERID = 879;
     $LVLID  = 2;
     $YRID   = 19;
     $PRDID  = 6;

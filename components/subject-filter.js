@@ -23,6 +23,7 @@ export async function subjectFilterComponent(){
                 </select>
             </div>`
         );
+
     }catch(error){
         console.error("Failed to fetch subject list:", error);
     }
