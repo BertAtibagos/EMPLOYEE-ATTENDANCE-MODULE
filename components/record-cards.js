@@ -14,7 +14,7 @@ function groupByDate(logs) {
 }
 
 
-export async function tableComponent(){
+export async function tableComponent(subjectId = null){
     
     let loading = true;
     let res = [];
@@ -28,7 +28,8 @@ export async function tableComponent(){
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: new URLSearchParams({
-                type: "FETCH_ATTENDANCE_LOGS"
+                type: "FETCH_ATTENDANCE_LOGS",
+                subjectId: subjectId
             })
         });
 
