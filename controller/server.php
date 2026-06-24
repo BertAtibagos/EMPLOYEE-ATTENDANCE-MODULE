@@ -46,7 +46,7 @@ if ($type === 'GET_SUBJECT_LIST') {
     // $YRID   = $_SESSION['STUDENT']['YRID'];
     // $PRDID  = $_SESSION['STUDENT']['PRDID'];
 
-    $USERID = 879;
+    $USERID = 26111;
     $LVLID  = 2;
     $YRID   = 19;
     $PRDID  = 6;

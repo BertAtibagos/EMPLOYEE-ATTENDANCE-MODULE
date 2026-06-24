@@ -13,7 +13,6 @@ function groupByDate(logs) {
     }, {});
 }
 
-
 export async function tableComponent(subjectId = null){
     
     let loading = true;

@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (attendance && subjectFilter) {
         attendance.innerHTML = await tableComponent();
         subjectFilter.innerHTML = await subjectFilterComponent();
+
+        document.getElementById('subjectSelect').addEventListener('change', async (e)=>{
+            const selectedSubject = e.target.value;
+
+            attendance.innerHTML = await tableComponent(selectedSubject);
+        });
     }
-});
-
-document.getElementById('subjectSelect').addEventListener('change', async (e)=>{
-    const selectedSubject = e.target.value;
-
-    attendance.innerHTML = await tableComponent(selectedSubject);
 });
