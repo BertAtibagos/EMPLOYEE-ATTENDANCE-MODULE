@@ -1,4 +1,5 @@
 import { loadingComp } from './loading-comp.js';
+import { attendanceLog } from '../api/attendance_log.js';
 
 const attendance = document.getElementById('attndnc_logs_card');
 
@@ -16,29 +17,15 @@ function groupByDate(logs) {
 export async function tableComponent(subjectId = null){
     
     let loading = true;
-    let res = [];
 
     if(loading){
         attendance.innerHTML = loadingComp();
     }
 
-    try{
-        const req = await fetch(`controller/server.php`,{
-            method: "POST",
-            headers: {"Content-Type": "application/x-www-form-urlencoded"},
-            body: new URLSearchParams({
-                type: "FETCH_ATTENDANCE_LOGS",
-                subjectId: subjectId
-            })
-        });
-
-        res = await req.json();
-    }catch(error){
-        console.error("Failed to fetch attendance logs:", error);
-    }finally{
-        loading = false;
-    }
-
+    const res = await attendanceLog(subjectId);
+    // if(res){
+    //     loading = false;
+    // }
     const groupedLogs = groupByDate(res);
 
     return(
