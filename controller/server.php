@@ -24,7 +24,6 @@ if($type == "FETCH_ATTENDANCE_LOGS"){
                 MAX(log_hist.SchlClsLogHis_DATETIME) AS last_login
             FROM schoolclassloghistory AS log_hist
             WHERE `SchlEnrollAssColl_ID` = ?
-            $filter
             GROUP BY
                 DATE(log_hist.SchlClsLogHis_DATETIME),
                 log_hist.SchlUserRF_ID";

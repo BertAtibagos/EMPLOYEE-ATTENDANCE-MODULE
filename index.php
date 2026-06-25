@@ -17,22 +17,6 @@
     <div class="card p-3 mb-4 shadow-sm">
         <div class="row g-3" id="subjectFilter">
            
-
-            <!-- <div class="col-md-4">
-                <label class="form-label">Start Date</label>
-                <input type="date" id="startDate" class="form-control">
-            </div>
-
-            <div class="col-md-4">
-                <label class="form-label">End Date</label>
-                <input type="date" id="endDate" class="form-control">
-            </div>
-
-            <div class="d-flex align-items-end">
-                <button id="filterBtn" class="btn w-100 text-white filter-btn">
-                    Filter
-                </button>
-            </div> -->
         </div>
     </div>
 
