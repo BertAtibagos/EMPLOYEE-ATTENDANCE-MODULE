@@ -6,14 +6,26 @@ $type = $_POST['type'];
 if($type == "FETCH_ATTENDANCE_LOGS"){
 
     // $USERID = $_SESSION['STUDENT']['ID'];
-    $USERID = 64004;
+    $USERID = 1;
+    $subjId = $_POST['subjectId'] ?? null;
 
-     $subjId = $_POST['subjectId'];
-     $filter = "";
-     $value = "";
+    $filter = "";
+    $value = [$USERID];
+    $bind = "i";
 
-    if ($subjId !== null && $subjId !== "") {
-        $filter= "";
+    if ($subjId !== "null" && $subjId !== "" && $subjId !== null) {
+        $filter .= " AND log_hist.SchlEnrollSubjOff_ID = ?";
+        $value[] = $subjId;
+        $bind .= "i";
+    }
+
+    if (isset($_POST['dateStart']) && isset($_POST['dateEnd'])) {
+        $startDate = $_POST['dateStart'];
+        $endDate = $_POST['dateEnd'];
+        $filter .= " AND DATE(log_hist.SchlClsLogHis_DATETIME) BETWEEN ? AND ?";
+        $value[] = $startDate;
+        $value[] = $endDate;
+        $bind .= "ss";
     }
     
     $qry = "SELECT
@@ -23,13 +35,21 @@ if($type == "FETCH_ATTENDANCE_LOGS"){
                 MIN(log_hist.SchlClsLogHis_DATETIME) AS first_login,
                 MAX(log_hist.SchlClsLogHis_DATETIME) AS last_login
             FROM schoolclassloghistory AS log_hist
-            WHERE `SchlEnrollAssColl_ID` = ?
+            WHERE `SchlEmp_ID` = ?
+            $filter
             GROUP BY
                 DATE(log_hist.SchlClsLogHis_DATETIME),
-                log_hist.SchlUserRF_ID";
+                log_hist.SchlUserRF_ID
+            ORDER BY log_date DESC";
 
     $stmt = $dbConn->prepare($qry);
-    $stmt->bind_param("i", $USERID);
+
+    if (!$stmt) {
+        echo json_encode(["error" => $dbConn->error]);
+        exit;
+    }
+
+    $stmt->bind_param($bind, ...$value);
     $stmt->execute();
     $result = $stmt->get_result();
     $fetch = $result->fetch_all(MYSQLI_ASSOC);
@@ -45,7 +65,7 @@ if ($type === 'GET_SUBJECT_LIST') {
     // $YRID   = $_SESSION['STUDENT']['YRID'];
     // $PRDID  = $_SESSION['STUDENT']['PRDID'];
 
-    $USERID = 26111;
+    $USERID = 957;
     $LVLID  = 2;
     $YRID   = 19;
     $PRDID  = 6;
@@ -105,7 +125,7 @@ if ($type === 'GET_SUBJECT_LIST') {
     $fetch = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 
-    } // end else
+    }
 }
 echo json_encode($fetch);
 ?>
