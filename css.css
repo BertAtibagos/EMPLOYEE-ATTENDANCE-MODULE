@@ -1,3 +1,5 @@
-.filter-btn{
-    background-color: #032a74;
+.attendance-card{
+    max-height: 500px;   /* Adjust as needed */
+    overflow-y: auto;
+    overflow-x: hidden;  /* Prevent horizontal scrolling */
 }
