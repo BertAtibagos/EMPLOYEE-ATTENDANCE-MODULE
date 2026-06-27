@@ -14,9 +14,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         subjectFilter.innerHTML += await buttonComponent("Search");
         attendance.innerHTML = await tableComponent();
 
-        const selectedSubject = document.getElementById('subjectSelect').value
-
         document.getElementById('searchButton').addEventListener('click', async (e)=>{
+            const selectedSubject = document.getElementById('subjectSelect').value
             const dateFilterStart = document.getElementById('dateFilterStart').value;
             const dateFilterEnd = document.getElementById('dateFilterEnd').value;
 
