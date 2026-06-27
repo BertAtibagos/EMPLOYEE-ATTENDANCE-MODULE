@@ -11,7 +11,7 @@ export async function attendanceLog(subjectId, dateStart, dateEnd) {
         if (dateStart) params.append("dateStart", dateStart);
         if (dateEnd) params.append("dateEnd", dateEnd);
 
-        const req = await fetch(`controller/server.php`,{
+        const req = await fetch(`controller/student.php`,{
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: params
