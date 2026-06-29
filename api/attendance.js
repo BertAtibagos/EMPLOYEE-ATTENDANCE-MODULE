@@ -1,6 +1,13 @@
+const session = window.__SESSION__;
+
 export async function attendanceLog(subjectId, dateStart, dateEnd) {
 
     let res = [];
+    let link = `controller/student.php`;
+
+    if(session.CATEGORY == 'INSTRUCTOR'){
+        link = `controller/employee.php`;
+    }
 
      try{
         const params = new URLSearchParams({
@@ -11,7 +18,7 @@ export async function attendanceLog(subjectId, dateStart, dateEnd) {
         if (dateStart) params.append("dateStart", dateStart);
         if (dateEnd) params.append("dateEnd", dateEnd);
 
-        const req = await fetch(`controller/student.php`,{
+        const req = await fetch(link,{
             method: "POST",
             headers: {"Content-Type": "application/x-www-form-urlencoded"},
             body: params
